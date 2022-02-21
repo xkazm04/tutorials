@@ -297,97 +297,11 @@ KMS can be used to securely sign any transaction with a `signatureId` instead of
 >- Whenever there is a **mnemonic** is required to sign a transaction, you need to replace the `mnemonic` field with a `signatureId` field containing the **signature ID of the mnemonic** from the wallet storage.
 
 You can also use KMS to [get a list of pending transactions to sign](https://tatum.io/apidoc.php#operation/GetPendingTransactionsToSign), [complete pending transactions to sign](https://tatum.io/apidoc.php#operation/CompletePendingSignature), and [delete transactions waiting to be signed](https://tatum.io/apidoc.php#operation/DeletePendingTransactionToSign).For a full list of API calls available for Tatum KMS, please refer to our [API documentation](https://tatum.io/apidoc.php#tag/Security-Key-Management-System).
-Tatum KMS also supports integrations to Azure Key Vault or VGS so that you can store your keys and mnemonics there. More information can be found on the Tatum KMS GitHub pages, where all of the source code is available.
-
-## Example usage of the API with Tatum KMS
-
-#### Create an account and generate a blockchain address
-
-This service facilitates [creating a wallet and generating an address](../blockchain/b3A6MjgzNjM1MTc-generate-wallet-and-address) on one of the supported blockchains, all in one call. The required parameters can be customized in the request body. 
-
-
-**Request example**
-```json
-curl --request POST \
-  --url https://api-eu1.tatum.io/v4/blockchain/chainId/account \
-  --header 'Content-Type: application/json' \
-  --header 'env: ' \
-  --header 'x-api-key: ' \
-  --data '{
-  "Account": {
-    "mnemonic": "urge pulp usage sister evidence arrest palm math please chief egg abuse"
-  },
-  "Address": {
-    "xpub": "xpub6EsCk1uU6cJzqvP9CdsTiJwT2rF748YkPnhv5Qo8q44DG7nn2vbyt48YRsNSUYS44jFCW9gwvD9kLQu9AuqXpTpM1c5hgg9PsuBLdeNncid",
-    "index": 0
-  }
-}'
-```
-**Response example**
-```json
-{
-  "Account": {
-    "secret": "snSFTHdvSYQKKkYntvEt8cnmZuPJB"
-  },
-  "Address": {
-    "address": "2MsM67NLa71fHvTUBqNENW15P68nHB2vVXb",
-    "xpub": "xpub6EsCk1uU6cJzqvP9CdsTiJwT2rF748YkPnhv5Qo8q44DG7nn2vbyt48YRsNSUYS44jFCW9gwvD9kLQu9AuqXpTpM1c5hgg9PsuBLdeNncid",
-    "index": 0
-  }
-}
-```
---- 
-**Transfer assets between addresses**
-
-Use this service to [transfer any blockchain assets](../blockchain/b3A6MjgzNjM1MjM-transfer-assets-between-addresses) from one address to another.
-
-**Request example**
-```json
-curl --request POST \
-  --url https://api-eu1.tatum.io/v4/blockchain/chainId/transaction \
-  --header 'Content-Type: application/json' \
-  --header 'env: ' \
-  --header 'x-api-key: ' \
-  --data '{
-  "sender": {
-    "privateKey": "0x05e150c73f1920ec14caa1e0b6aa09940899678051a78542840c2668ce5080c2",
-    "secret": "snSFTHdvSYQKKkYntvEt8cnmZuPJB",
-    "address": "0x687422eEA2cB73B5d3e242bA5456b782919AFc85",
-    "utxoIndex": 0
-  },
-  "receiver": [
-    {
-      "address": "0x687422eEA2cB73B5d3e242bA5456b782919AFc85",
-      "note": "Hello there",
-      "chainId": "ETH",
-      "token": {
-        "address": "2MsM67NLa71fHvTUBqNENW15P68nHB2vVXb",
-        "symbol": "BTC",
-        "amount": 0
-      }
-    }
-  ],
-  "fee": {
-    "price": 50,
-    "limit": 50000,
-    "currency": "CELO"
-  }
-}'
-```
-**Response example**
-```json
-{
-  "signatureId": "26d3883e-4e17-48b3-a0ee-09a3e484ac83"
-}
-
-```
-<!-- theme: info -->
->Keep in mind that, when a private key is included in the request, you need to enter the `signatureId` of the private key to the wallet storage. Private keys can be stored using the `storemanagedprivatekey` command. You can generate a private key to a managed stored wallet using the `getprivatekey` command. When there is a mnemonic, you need to enter the `signatureId` of the mnemonic belonging to the wallet storage.
->
->In the case mentioned above, the process is a little different. The transaction is not signed and sent to the blockchain yet. Instead, it is enlisted as a pending transaction waiting to be processed by the KMS.
->
->When the KMS [detects a new pending transaction](../custody/b3A6MzYyNjUxNzc-get-pending-transactions-to-sign), it signs it locally and sends it to the blockchain. The transaction must also [be marked  as processed](../custody/b3A6MzA3NjM1NzQ-complete-pending-transaction-to-sign) so as not be sent to the blockchain again.‌
->
->This process is the same for every transaction method in every blockchain. It may seem a little complicated at the beginning but it provides you with the best security available.
 
 Tatum KMS also supports integrations to [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/#product-overview) or [VGS](https://www.verygoodsecurity.com/), enabling you to store your keys and mnemonics there. More information can be found on the [Tatum KMS GitHub pages](https://github.com/tatumio/tatum-kms), where all the source code is available.
+
+---
+
+# Great job!
+
+Now you can create super-secure, scalable custodial apps in no time! Stay tuned for more updates and tutorials on different ways to work with Tatum KMS, and check out our [Crypto Exchange workshop](https://www.youtube.com/watch?v=CGgyyTTv0yw) for more on how to use KMS.
