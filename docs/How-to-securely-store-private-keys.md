@@ -304,4 +304,6 @@ Tatum KMS also supports integrations to [Azure Key Vault](https://azure.microsof
 
 # Great job!
 
-Now you can create super-secure, scalable custodial apps in no time! Stay tuned for more updates and tutorials on different ways to work with Tatum KMS, and check out our [Crypto Exchange workshop](https://www.youtube.com/watch?v=CGgyyTTv0yw) for more on how to use KMS.
+Now you can create super-secure, scalable custodial apps in no time! Stay tuned for more updates and tutorials on different ways to work with Tatum KMS, and check out our Crypto Exchange workshop for more on how to use KMS:
+
+https://www.youtube.com/watch?v=CGgyyTTv0yw
