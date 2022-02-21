@@ -317,7 +317,7 @@ curl --request POST \
     "contractAddress": "0x687422eEA2cB73B5d3e242bA5456b782919AFc85",
     "signatureId": "26d3883e-4e17-48b3-a0ee-09a3e484ac83",
     "nonce": 0,
-    "feeCurrency": "CELO"
+    "feeCurrency": "CELO",
     "fee": {
        "gasLimit": "30000",
        "gasPrice": "5"
@@ -336,7 +336,7 @@ curl --request POST \
     "spender": "0x687422eEA2cB73B5d3e242bA5456b782919AFc85",
     "contractAddress": "0x687422eEA2cB73B5d3e242bA5456b782919AFc85",
     "fromPrivateKey": "0x4874827a55d87f2309c55b835af509e3427aa4d52321eeb49a2b93b5c0f8edfb",
-    "feeCurrency": "CELO"
+    "feeCurrency": "CELO",
     "fee": {
        "gasLimit": "30000",
        "gasPrice": "5"
@@ -391,6 +391,7 @@ curl --request POST \
     "signatureId": "26d3883e-4e17-48b3-a0ee-09a3e484ac83",
     "index": 0,
     "nonce": 1,
+    "feeCurrency": "CELO",
     "fee": {
        "gasLimit": "30000",
        "gasPrice": "5"
@@ -408,6 +409,7 @@ curl --request POST \
     "bidValue": "0.001015",
     "chain": "CELO",
     "fromPrivateKey": "0x4874827a55d87f2309c55b835af509e3427aa4d52321eeb49a2b93b5c0f8edfb"
+    "feeCurrency": "CELO",
     "fee": {
        "gasLimit": "30000",
        "gasPrice": "5"
@@ -462,6 +464,7 @@ curl --location --request POST 'https://api-eu1.tatum.io/v3/blockchain/auction/s
     "signatureId": "26d3883e-4e17-48b3-a0ee-09a3e484ac83",
     "index": 0,
     "nonce": 1,
+    "feeCurrency": "CUSD",
     "fee": {
        "gasLimit": "40000",
        "gasPrice": "20"
@@ -477,6 +480,7 @@ curl --location --request POST 'https://api-eu1.tatum.io/v3/blockchain/auction/s
     "id": "1",
     "chain": "CELO",
     "fromPrivateKey": "0xa488a82b8b57c3ece4307525741fd8256781906c5fad948b85f1d63000948236"
+    "feeCurrency": "CUSD",
     "fee": {
        "gasLimit": "40000",
        "gasPrice": "20"
