@@ -29,7 +29,7 @@ The first step is to create gas pump smart contracts. Each smart contract functi
 
 Any combination of tokens can be transferred in a batch transaction. This is significantly more efficient and saves enormously on gas fees compared to transferring assets one by one.
 
-Enough talk; let's [generate some gas pump wallets](../blockchain/b3A6MzA4ODYyMjE-generate-custodial-wallet-address) on the Polygon Mumbai testnet. In this call, we must designate the number of wallets we want to create in the "batchCount" field.
+Enough talk; let's generate some gas pump wallets on the Polygon Mumbai testnet. In this call, we must designate the number of wallets we want to create in the "batchCount" field.
 
 **Request example**
 ```json
@@ -64,7 +64,7 @@ curl --request POST \
 
 #### Transfer asset from a gas pump address
 
-Your user deposited some ERC-20 or ERC-721 tokens into his account. Now it's time to [move assets to another address](../blockchain/b3A6MzA4ODYyMjM-transfer-assets). You don't have to send any MATIC there to pay for gas; just state which assets should be sent, how much and where. Let's send an ERC-721 token with a `tokenId` of 100 from the address.
+Your user deposited some ERC-20 or ERC-721 tokens into his account. Now it's time to move assets to another address. You don't have to send any MATIC there to pay for gas; just state which assets should be sent, how much and where. Let's send an ERC-721 token with a `tokenId` of 100 from the address.
 
 **Request example**
 ```json
@@ -109,7 +109,7 @@ The `contractType` attribute is important, as it tells the wallet which kind of 
 
 #### Transfer assets from a custodial address in a batch call
 
-Simple transfers are great, but [batch transfers](../blockchain/b3A6MzA4ODYyMjQ-transfer-multiple-assets) are much more powerful. In this operation, you can basically transfer all assets from an address in one transaction. You can define different recipients for different assets, you can split the balance of the ERC-20 token between two different recipients and much more.
+Simple transfers are great, but batch transfers are much more powerful. In this operation, you can basically transfer all assets from an address in one transaction. You can define different recipients for different assets, you can split the balance of the ERC-20 token between two different recipients and much more.
 
 In this example, we are transferring all types of assets we have in the gas pump wallet in one call:
 
