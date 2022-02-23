@@ -227,6 +227,7 @@ Be aware that there is a change in the behavior of this operation. The transacti
 
 When KMS picks up the pending transaction, it will output something like:
 
+<div class='tabbed-code-blocks'>
 ```Response
 Processing pending transaction - {
 "withdrawalId": null,
@@ -240,6 +241,7 @@ Processing pending transaction - {
 "id": "61fe7c68cf2fbc595cbb89dd"
 }.
 ```
+</div>
 
 ### 9. Get transaction details
 
