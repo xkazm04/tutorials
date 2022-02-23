@@ -14,10 +14,11 @@ If you build a non-custodial application, most of your users will probably use M
 
 The first step is to connect your web app with MetaMask. To do so, we'll create an Enable button on your web page that will request the accounts handled by MetaMask.
 
-<div class='tabbed-code-blocks'>
-```HTML
+
+```html
 <button class="enableMetamask">Enable MetaMask</button>
 ```
+<div class='tabbed-code-blocks'>
 ```JS
 let accounts = [];
 document.querySelector('.enableMetamask')
@@ -40,7 +41,7 @@ In this example, we are assuming that MetaMask is installed as a Chrome extensio
 Next, we will leverage a functionality Tatum uses for its Key Management System (KMS) tool to prepare a transaction for MetaMask. We will assemble it in KMS using a `signatureId`, but we will prepare the transaction configuration instead of signing it and broadcasting it to the blockchain.
 In this example, we'll deploy an NFT smart contract on the Polygon Mumbai testnet.
 
-
+<div class='tabbed-code-blocks'>
 ```Example
 // 1. Let's call the Deploy NFT with the signatureId present
 //    You can use any arbitrary UUID v4 string as a signatureId
@@ -67,10 +68,11 @@ const {
   }
 });
 ```
+</div>
 
 1. First, we'll invoke the [Deploy NFT](https://developer.tatum.io/rest/smart-contracts/deploy-nft-smart-contract) operation. We will use a `signatureId` in the call, which can be any arbitrary UUID v4 string. Again, we will not sign the transaction and broadcast it to the blockchain. We will only prepare the transaction config.
 
-
+<div class='tabbed-code-blocks'>
 ```Example
 const response = await axios.post('https://api-eu1.tatum.io/v3/nft/deploy/', {
   "name": "Test Token",
@@ -83,6 +85,7 @@ const response = await axios.post('https://api-eu1.tatum.io/v3/nft/deploy/', {
   }
 });
 ```
+</div>
 
 2. The response is the `signatureId` - the identifier of the prepared transaction that is waiting to be signed.
 
@@ -96,7 +99,7 @@ const {
 
 3. Next, we'll grab the pending transaction.
 
-
+<div class='tabbed-code-blocks'>
 ```Example
 const {
   data
@@ -106,7 +109,7 @@ const {
   }
 });
 ```
-
+</div>
 
 ---
 
@@ -143,18 +146,18 @@ parseInt(txConfig.gasPrice).toString(16) : undefined;
 
 4. And finally, let's send the transaction to MetaMask.
 
-
+<div class='tabbed-code-blocks'>
 ```Example
 console.log(await ethereum.request({
   method: 'eth_sendTransaction',
   params: [txConfig],
 }));
 ```
-
+</div>
 
 Below, all the steps of **Deploying an NFT** are assembled together.
 
-
+<div class='tabbed-code-blocks'>
 ```Example
 // 1. Let's call the Deploy NFT with the signatureId present
 //    You can use any arbitrary UUID v4 string as a signatureId
@@ -192,7 +195,7 @@ console.log(await ethereum.request({
   params: [txConfig],
 }));
 ```
-
+</div>
 
 ---
 
