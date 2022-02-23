@@ -12,20 +12,23 @@ If you want to build a backend for your own peer-to-peer NFT marketplace, you’
 
 <div class="toolbar-note">
 With this type of marketplace, your users can create listings to sell ERC-721 or ERC-1155 tokens. These tokens can be purchased with the native assets of the given blockchain (e.g. ETH on Ethereum or MATIC on Polygon) or any ERC-20 token available on your blockchain of choice.
+</div>
 Currently supported blockchains are:
 - Ethereum
 - Celo
 - Polygon
+- Klaytn
 - Binance Smart Chain
 - Harmony.ONE
 All smart contracts are available [here](https://github.com/tatumio/smart-contracts/blob/master/contracts/tatum/nft/MarketplaceListing.sol).
-</div>
+
 
 ---
 ## Import required libraries
 
 If you are using our JavaScript SDK, the first step is to import all of the required JS libraries for the functions we will be using.
 
+<div class='tabbed-code-blocks'>
 ```JavaScript
 import { 
     deployMarketplaceListing,
@@ -36,8 +39,8 @@ import {
     sendAuctionApproveNftTransfer
 } from '@tatumio/tatum';
 ```
+</div>
 
----
 ## Deploy your own marketplace
 
 The first step is to [create your own marketplace smart contract](https://developer.tatum.io/rest/smart-contracts/create-nft-marketplace). This is a one-time operation, and the marketplace you deploy will be used for every listing in your application. In this example, we'll deploy our marketplace on the Celo blockchain.
@@ -53,7 +56,6 @@ const body = new DeployMarketplaceListing()
     body.chain = Currency.CELO
     const test = await deployMarketplaceListing(true, body, 'https://alfajores-forno.celo-testnet.org')
     console.log(test)
-
 ```
 ```REST API call with KMS
 curl --request POST \
@@ -235,7 +237,6 @@ console.log(await sendAuctionApproveNftTransfer(true, {
     spender: '0x991dfc0db4cbe2480296eec5bcc6b3215a9b7038',
     tokenId:'1'
   }, 'https://alfajores-forno.celo-testnet.org'));
-
 const endedAt = (await celoGetCurrentBlock()) + 9;
 ```
 ```REST API call with KMS
