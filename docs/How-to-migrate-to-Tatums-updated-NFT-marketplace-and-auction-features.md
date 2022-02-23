@@ -6,8 +6,9 @@
 
 With the launch of our new NFTs that pay royalties as percentages and record provenance data, we have updated the workflow for our instantly deployable NFT marketplace and NFT auction features. This new workflow now enables you to use the new NFT provenance and royalty functionality, and no longer requires users to send their NFTs to the marketplace or auction smart contracts. It also allows NFT creators to receive cashback in whatever custom ERC-20 they would like on whatever blockchain they’re minting on.
 
-<!-- theme: danger -->
->The old workflow will be discontinued, so it is necessary for all applications that use our NFT marketplace and auction functionality to migrate as soon as possible.
+<div class="toolbar-warning">
+The old workflow will be discontinued, so it is necessary for all applications that use our NFT marketplace and auction functionality to migrate as soon as possible.
+</div>
 
 ---
 
@@ -19,13 +20,16 @@ In addition, if they wish to leverage the percentage royalties functionality wit
 
 And finally, if NFT creators want to receive cashback in a custom ERC-20 token, they can now add the smart contract address of the ERC-20 in the mint NFT call.
 
+---
+
 ## How to migrate
 
 Our new NFT marketplace and auction workflows have just two different steps than the previous workflows, assuming you’d like to use provenance and percentage royalty functionality. It works like this, with the new steps in bold lettering:
-1. Mint an NFT. For more information on how mint royalty NFTs with provenance data and percentage cashback, please refer to this guide.
-2. **If you’d like to set cashback to be paid out in any custom ERC-20 token on whatever blockchain you’re minting on, you can now do so by adding an “ERC20” property to the API endpoint body. In this field, enter the smart contract address of the ERC-20 token in which the cashback will be paid out. Please refer to our guide on how to create royalty NFTs with provenance data and percentage cashback for more information.**
+1. Mint an NFT. For more information on how mint royalty NFTs with provenance data and percentage cashback, please refer to [this guide](url).
+2. **If you’d like to set cashback to be paid out in any custom ERC-20 token on whatever blockchain you’re minting on, you can now do so by adding an “ERC20” property to the API endpoint body. In this field, enter the smart contract address of the ERC-20 token in which the cashback will be paid out. Please refer to our guide on [how to create royalty NFTs with provenance data and percentage cashback](url) for more information.**
 3. **Give permission to the NFT marketplace or auction smart contract to transfer the NFT.**
 
+<div class='tabbed-code-blocks'>
 ```SDK
 console.log(await sendAuctionApproveNftTransfer(true, {
     fromPrivateKey: '0xa488a82b8b57c3ece4307525741fd8256781906c5fad948b85f1d63000948236',
@@ -77,11 +81,13 @@ curl --request POST \
      }
    }
 ```
+</div>
 
-4. Create a new marketplace or auction listing. For more information on how to do so, please refer to our guide on creating NFT marketplaces or our guide on creating NFT auctions.
-5. If the NFT is listed as for sale for an ERC-20 token, the buyer must then give the ERC-20 smart contract permission to spend ERC-20 tokens at the marketplace or auction.
+4. Create a new [marketplace](https://developer.tatum.io/rest/smart-contracts/sell-asset-on-the-nft-marketplace) or [auction](https://developer.tatum.io/rest/smart-contracts/sell-asset-on-the-nft-marketplace) listing. For more information on how to do so, please refer to our [guide on creating NFT marketplaces](url) or [our guide on creating NFT auctions](url).
+5. If the NFT is listed as for sale for an ERC-20 token, the buyer must then [give the ERC-20 smart contract permission to spend ERC-20 tokens at the marketplace or auction](https://developer.tatum.io/rest/smart-contracts/approve-spending-of-erc-20).
 6. **To pay the royalties as a percentage of the sale price at the NFT marketplace in an ERC-20 token, the buyer must then give permission to the NFT smart contract to spend the ERC-20 token and send royalties to the creators.**
 
+<div class='tabbed-code-blocks'>
 ```SDK
 const approve = new ApproveErc20();
         approve.contractAddress = '0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1';
@@ -126,8 +132,11 @@ curl --request POST \
      "feeCurrency": "CELO"
    }
 ```
+</div>
 
-7. Now, the buyer can use the buy asset on marketplace or the bid for asset on auction endpoints to purchase or bid for the NFT from the marketplace or auction.
+7. Now, the buyer can use the [buy asset on marketplace](https://developer.tatum.io/rest/smart-contracts/buy-asset-on-the-nft-marketplace) or the [bid for asset on auction](https://developer.tatum.io/rest/smart-contracts/bid-for-asset-on-the-nft-auction) endpoints to purchase or bid for the NFT from the marketplace or auction.
+
+---
 
 ## And you’re good to go! 
 
