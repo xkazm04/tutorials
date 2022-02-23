@@ -10,14 +10,15 @@ Peer-to-peer NFT marketplaces like OpenSea allow users to create NFTs with metad
 
 <div class="toolbar-note">
 With this type of marketplace, your users can create auctions to sell ERC-721 or ERC-1155 tokens. These tokens can be purchased with the native assets of the given blockchain (e.g. ETH on Ethereum or MATIC on Polygon) or any ERC-20 token available on your blockchain of choice.
-Currently supported blockchains are:
-- Ethereum
-- Celo
-- Polygon
-- Binance Smart Chain
-- Harmony.ONE.
-All smart contracts are available [here.](https://github.com/tatumio/smart-contracts/blob/master/contracts/tatum/nft/MarketplaceListing.sol)
 </div>
+Currently supported blockchains are:
+- **Ethereum**
+- **Celo**
+- **Polygon**
+- **Binance Smart Chain**
+- **Harmony.ONE**
+All smart contracts are available [here.](https://github.com/tatumio/smart-contracts/blob/master/contracts/tatum/nft/MarketplaceListing.sol)
+
 
 ---
 # Import required libraries
