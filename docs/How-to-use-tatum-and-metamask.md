@@ -69,7 +69,7 @@ const {
 });
 ```
 </div>
-1. First, we'll invoke the [Deploy NFT](https://developer.tatum.io/rest/smart-contracts#/b3A6MzA3NjA5MDg-deploy-nft-smart-contract) operation. We will use a `signatureId` in the call, which can be any arbitrary UUID v4 string. Again, we will not sign the transaction and broadcast it to the blockchain. We will only prepare the transaction config.
+1. First, we'll invoke the [Deploy NFT](https://developer.tatum.io/rest/smart-contracts/deploy-nft-smart-contract) operation. We will use a `signatureId` in the call, which can be any arbitrary UUID v4 string. Again, we will not sign the transaction and broadcast it to the blockchain. We will only prepare the transaction config.
 
 <div class='tabbed-code-blocks'>
 ```json
