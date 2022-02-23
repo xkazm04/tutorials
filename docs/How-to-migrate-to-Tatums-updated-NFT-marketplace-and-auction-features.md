@@ -36,7 +36,6 @@ console.log(await sendAuctionApproveNftTransfer(true, {
     chain: Currency.CELO, contractAddress: '0x1214BEada6b25bc98f7494C7BDBf22C095FDCaBD',
     isErc721: true, spender: '0x991dfc0db4cbe2480296eec5bcc6b3215a9b7038', tokenId
 }, 'https://alfajores-forno.celo-testnet.org'));
-
  const endedAt = (await celoGetCurrentBlock()) + 9;
 
 ```
@@ -98,7 +97,6 @@ const approve = new ApproveErc20();
         approve.fromPrivateKey = '0x4874827a55d87f2309c55b835af509e3427aa4d52321eeb49a2b93b5c0f8edfb';
         approve.fee = {gasPrice: '5', gasLimit: '300000'};
         console.log(await sendAuctionApproveErc20Transfer(true, approve, 'https://alfajores-forno.celo-testnet.org'));
-
 ```
 ```REST API call with Private key
 curl --request POST \
