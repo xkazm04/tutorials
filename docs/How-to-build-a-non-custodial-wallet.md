@@ -34,14 +34,11 @@ When a new user signs up for the application, [blockchain wallets](https://devel
 
 ![non_custodial_wallet_infografics___-23.jpg](https://stoplight.io/api/v1/projects/cHJqOjExNjE5Mw/images/qVO5r2rjAwE)
 
-<div class="toolbar-tip">
-[How to create a blockchain wallet]()
-</div>
 
 When you create accounts, blockchain [addresses should be created](https://developer.tatum.io/rest/virtual-accounts/create-new-deposit-address) and connected to the ledger accounts. This starts the process of automatic synchronization of incoming blockchain transactions. It is possible to [enable webhook notifications for every incoming transaction](https://developer.tatum.io/rest/subscriptions/create-new-subscription) to the account.
 
 <div class="toolbar-tip">
-[How to automatically scan blockchain addresses and set up webhook notifications]()
+[How to automatically scan blockchain addresses and set up webhook notifications](https://developer.tatum.io/guides/ledger-and-off-chain/how-to-automatically-scan-blockchain-addresses-and-set-up-webhook-notifications)
 </div>
 
 ---
