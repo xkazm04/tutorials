@@ -26,11 +26,12 @@ You simply top up the master address with a balance of crypto from which you’l
 
 The gas pump functionality is currently supported on the following blockchains:
 
-- Ethereum
-- Binance Smart Chain (BSC)
-- Celo
-- Polygon (MATIC)
-- Tron
+- **Ethereum**
+- **Binance Smart Chain (BSC)**
+- **Celo**
+- **Polygon (MATIC)**
+- **Klaytn**
+- **Tron**
 
 ### Generate new gas pump smart contracts
 
