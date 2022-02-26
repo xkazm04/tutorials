@@ -13,13 +13,15 @@ If you want to build a backend for your own peer-to-peer NFT marketplace, you’
 <div class="toolbar-note">
 With this type of marketplace, your users can create listings to sell ERC-721 or ERC-1155 tokens. These tokens can be purchased with the native assets of the given blockchain (e.g. ETH on Ethereum or MATIC on Polygon) or any ERC-20 token available on your blockchain of choice.
 </div>
+
 Currently supported blockchains are:
-- **Ethereum**
-- **Celo**
-- **Polygon**
-- **Klaytn**
-- **Binance Smart Chain**
-- **Harmony.ONE**
+- Ethereum
+- Celo
+- Polygon
+- Klaytn
+- Binance Smart Chain
+- Harmony.ONE
+
 All smart contracts are available [here](https://github.com/tatumio/smart-contracts/blob/master/contracts/tatum/nft/MarketplaceListing.sol).
 
 
