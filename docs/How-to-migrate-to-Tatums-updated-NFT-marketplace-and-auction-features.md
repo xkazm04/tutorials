@@ -37,7 +37,6 @@ console.log(await sendAuctionApproveNftTransfer(true, {
     isErc721: true, spender: '0x991dfc0db4cbe2480296eec5bcc6b3215a9b7038', tokenId
 }, 'https://alfajores-forno.celo-testnet.org'));
  const endedAt = (await celoGetCurrentBlock()) + 9;
-
 ```
 ```REST API call with Private key
 curl --request POST \
