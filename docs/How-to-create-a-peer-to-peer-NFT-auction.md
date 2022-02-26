@@ -16,6 +16,7 @@ Currently supported blockchains are:
 - **Celo**
 - **Polygon**
 - **Binance Smart Chain**
+- **Klaytn**
 - **Harmony.ONE**
 All smart contracts are available [here.](https://github.com/tatumio/smart-contracts/blob/master/contracts/tatum/nft/MarketplaceListing.sol)
 

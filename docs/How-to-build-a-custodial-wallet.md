@@ -1,6 +1,6 @@
 # How to build a custodial wallet
 
-*Build a bacend for custodial wallet in 30 minutes*
+*Build a backend for custodial wallet in 30 minutes*
 
 ---
 
@@ -27,9 +27,6 @@ There are three logical groups of actions to create a wallet:
 
 This phase is a one-time step that must be done before the launch of the wallet. It involves creating [the blockchain wallets](https://developer.tatum.io/rest/blockchain/generate-bitcoin-wallet) your application will support or creating system accounts for the wallet provider.
 
-<div class="toolbar-tip">
-[How to create a blockchain wallet]()
-</div>
 
 ---
 
@@ -63,13 +60,13 @@ The user can see the [details of the account](https://developer.tatum.io/rest/vi
 Finally, there should be the option to [send the transaction from the account to a blockchain](https://developer.tatum.io/rest/virtual-accounts/send-bitcoin-from-tatum-account-to-address) address.
 
 <div class="toolbar-tip">
-[How to send a Bitcoin blockchain transaction from a virtual account]()
+[How to send a Bitcoin blockchain transaction from a virtual account](https://developer.tatum.io/guides/ledger-and-off-chain/how-to-block-amounts-on-the-account)
 </div>
 
 Depending on the requirements, it is possible to enable transactions within the ecosystem to be exclusively performed inside the application. These are [ledger transactions](https://developer.tatum.io/rest/virtual-accounts/send-payment), which are feeless and instant.
 
 <div class="toolbar-tip">
-[How to send feeless instant transaction]()
+[How to send feeless instant transaction](https://developer.tatum.io/guides/ledger-and-off-chain/how-to-send-feeless-instant-transaction)
 </div>
 
 And that's all there is to it. There are many more ways to enhance your app and many more features to implement, but this should be a reasonable start for you and your wallet.
