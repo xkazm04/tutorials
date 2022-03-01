@@ -12,12 +12,14 @@ Peer-to-peer NFT marketplaces like OpenSea allow users to create NFTs with metad
 With this type of marketplace, your users can create auctions to sell ERC-721 or ERC-1155 tokens. These tokens can be purchased with the native assets of the given blockchain (e.g. ETH on Ethereum or MATIC on Polygon) or any ERC-20 token available on your blockchain of choice.
 </div>
 Currently supported blockchains are:
+
 - **Ethereum**
 - **Celo**
 - **Polygon**
 - **Binance Smart Chain**
 - **Klaytn**
 - **Harmony.ONE**
+
 All smart contracts are available [here.](https://github.com/tatumio/smart-contracts/blob/master/contracts/tatum/nft/MarketplaceListing.sol)
 
 
@@ -45,7 +47,7 @@ import {
 
 ## Create an auction house
 
-The first step is to [create your own auction house smart contract](https://developer.tatum.io/rest/smart-contracts/create-nft-auction). This is a one-time operation, and the auction house you deploy will be used for every listing in your application. In this example, we'll deploy our auction house on the Polygon network.
+The first step is to [create your own auction house smart contract](https://docs.tatum.io/rest/smart-contracts/create-nft-auction). This is a one-time operation, and the auction house you deploy will be used for every listing in your application. In this example, we'll deploy our auction house on the Polygon network.
 
 <div class='tabbed-code-blocks'>
 ```SDK
@@ -299,7 +301,7 @@ The body of the API request should contain the following parameters:
 
 ## Approve ERC-20 for bidding and for cashback
 
-For a listing for an NFT being sold for ERC-20 tokens, the buyer [must approve the auction smart contract to spend his ERC-20 tokens](https://developer.tatum.io/rest/smart-contracts/approve-spending-of-erc-20) before the actual buy operation. Here is the call to approve the auction for spending the ERC-20 token:
+For a listing for an NFT being sold for ERC-20 tokens, the buyer [must approve the auction smart contract to spend his ERC-20 tokens](https://docs.tatum.io/rest/smart-contracts/approve-spending-of-erc-20) before the actual buy operation. Here is the call to approve the auction for spending the ERC-20 token:
 
 <div class='tabbed-code-blocks'>
 ```SDK
@@ -377,7 +379,7 @@ Once the token is in the auction, anyone can bid. Only bids higher than the high
 The listing in the example is for 1 CELO and the fee is 1.5%, so the buyer would have to spend 1.015 CELO to buy the asset.
 </div>
 
-Use the following API call to [bid for the NFT](https://developer.tatum.io/rest/smart-contracts/bid-for-asset-on-the-nft-auction).
+Use the following API call to [bid for the NFT](https://docs.tatum.io/rest/smart-contracts/bid-for-asset-on-the-nft-auction).
 
 <div class='tabbed-code-blocks'>
 ```SDK
@@ -456,7 +458,7 @@ The response is a transaction ID. Having performed this operation, the bidder ha
 
 Once the auction ends and no more bids can be accepted, any party can settle the auction. In this operation, the NFT is transferred to the buyer, the amount is transferred to the seller, and the fee is transferred to the fee recipient (i.e. the auction house owner address). Settlement can't be performed with a live auction.
 
-Use the following API call to [settle an  auction](https://developer.tatum.io/rest/smart-contracts/settle-auction-of-the-asset-on-the-nft-auction).
+Use the following API call to [settle an  auction](https://docs.tatum.io/rest/smart-contracts/settle-auction-of-the-asset-on-the-nft-auction).
 
 <div class='tabbed-code-blocks'>
 ```SDK
