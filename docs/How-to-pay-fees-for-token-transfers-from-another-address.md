@@ -39,7 +39,7 @@ The first step is to create gas pump smart contracts. Each smart contract functi
 
 Any combination of tokens can be transferred in a batch transaction. This is significantly more efficient and saves enormously on gas fees compared to transferring assets one by one.
 
-Enough talk; let's [generate some gas pump wallets](https://developer.tatum.io/rest/smart-contracts/generate-custodial-wallet-address) on the Polygon Mumbai testnet. In this call, we must designate the number of wallets we want to create in the "batchCount" field.
+Enough talk; let's [generate some gas pump wallets](https://docs.tatum.io/rest/smart-contracts/generate-custodial-wallet-address) on the Polygon Mumbai testnet. In this call, we must designate the number of wallets we want to create in the "batchCount" field.
 
 <div class='tabbed-code-blocks'>
 ```Request
@@ -69,7 +69,7 @@ curl --request POST \
 ```
 </div>
 
-As a response, we obtain transaction hash. From this hash, we can [find the addresses of the contracts](https://developer.tatum.io/rest/smart-contracts/get-custodial-addresses-from-transaction) - the addresses of our gas pump wallets.
+As a response, we obtain transaction hash. From this hash, we can [find the addresses of the contracts](https://docs.tatum.io/rest/smart-contracts/get-custodial-addresses-from-transaction) - the addresses of our gas pump wallets.
 
 <div class='tabbed-code-blocks'>
 ```Request
@@ -101,7 +101,7 @@ You can assign these addresses to your users. They are capable of accepting MATI
 
 ### Transfer asset from a gas pump address
 
-Your user deposited some ERC-20 or ERC-721 tokens into his account. Now it's time to [move assets to another address](https://developer.tatum.io/rest/smart-contracts/transfer-assets-from-custodial-wallet). You don't have to send any MATIC there to pay for gas; just state which assets should be sent, how much and where. Let's send an ERC-721 token with a `tokenId` of 100 from the address.
+Your user deposited some ERC-20 or ERC-721 tokens into his account. Now it's time to [move assets to another address](https://docs.tatum.io/rest/smart-contracts/transfer-assets-from-custodial-wallet). You don't have to send any MATIC there to pay for gas; just state which assets should be sent, how much and where. Let's send an ERC-721 token with a `tokenId` of 100 from the address.
 
 <div class='tabbed-code-blocks'>
 ```Request
@@ -146,7 +146,7 @@ Since the transfer endpoint is universal and neither ERC-20 tokens nor native as
 
 ### Transfer assets from a custodial address in a batch call
 
-Simple transfers are great, but [batch transfers](https://developer.tatum.io/rest/smart-contracts/transfer-multiple-assets-from-custodial-wallet) are much more powerful. In this operation, you can basically transfer all assets from an address in one transaction. You can define different recipients for different assets, you can split the balance of the ERC-20 token between two different recipients and much more.
+Simple transfers are great, but [batch transfers](https://docs.tatum.io/rest/smart-contracts/transfer-multiple-assets-from-custodial-wallet) are much more powerful. In this operation, you can basically transfer all assets from an address in one transaction. You can define different recipients for different assets, you can split the balance of the ERC-20 token between two different recipients and much more.
 
 In this example, we are transferring all types of assets we have in the gas pump wallet in one call:
 
@@ -196,4 +196,4 @@ Once again, we obtain transaction hash as a response.
 In case the asset you want to transfer does not have `tokenAddress`, `amount` or `tokenId`, input value 0 instead. We will take care of the rest for you.
 </div>
 
-To find out more about the API calls we have just used, see our [API Reference](https://developer.tatum.io/rest/smart-contracts/custodial-wallets).
+To find out more about the API calls we have just used, see our [API Reference](https://docs.tatum.io/rest/smart-contracts/custodial-wallets).

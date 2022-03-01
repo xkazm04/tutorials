@@ -32,13 +32,13 @@ Trades are not performed on the blockchain (on-chain), as this would be extremel
 
 ## Setting up the application
 
-This phase is a one-time step that must be done before the launch of the exchange. It involves creating [the blockchain wallets](https://developer.tatum.io/rest/blockchain/generate-bitcoin-wallet) your application will support or creating service fee accounts for the wallet provider.
+This phase is a one-time step that must be done before the launch of the exchange. It involves creating [the blockchain wallets](https://docs.tatum.io/rest/blockchain/generate-bitcoin-wallet) your application will support or creating service fee accounts for the wallet provider.
 
 ![SetUpYourApp.jpg](https://stoplight.io/api/v1/projects/cHJqOjExNjE5Mw/images/D3NosL1IKQo)
 
 ### Creating blockchain wallets
 
-To [generate a Bitcoin wallet](https://developer.tatum.io/rest/blockchain/generate-bitcoin-wallet), you need to call a request to the Bitcoin/wallet endpoint. This is the same [for Ethereum](https://developer.tatum.io/rest/blockchain/generate-ethereum-wallet). Only the endpoint is different. The result contains two fields - mnemonic and xpub. 
+To [generate a Bitcoin wallet](https://docs.tatum.io/rest/blockchain/generate-bitcoin-wallet), you need to call a request to the Bitcoin/wallet endpoint. This is the same [for Ethereum](https://docs.tatum.io/rest/blockchain/generate-ethereum-wallet). Only the endpoint is different. The result contains two fields - mnemonic and xpub. 
 
 <div class='tabbed-code-blocks'>
 ```Request
@@ -72,7 +72,7 @@ For every supported blockchain wallet, a service ledger account should be create
 Accounting currency is part of Tatum's built-in compliance engine. It's enabled by default.
 </div> 
 
-Every account should have a properly set up accounting currency. It should be the FIAT currency of the country where the accounting is performed. For example, for an exchange in Germany, accounting should be in EUR, so the accounting currency is EUR. More details are available in the [API Reference](https://developer.tatum.io/rest/virtual-accounts/account-services).
+Every account should have a properly set up accounting currency. It should be the FIAT currency of the country where the accounting is performed. For example, for an exchange in Germany, accounting should be in EUR, so the accounting currency is EUR. More details are available in the [API Reference](https://docs.tatum.io/rest/virtual-accounts/account-services).
 
 <div class='tabbed-code-blocks'>
 ```Request
@@ -113,7 +113,7 @@ After the configuration has been completed and the exchange is live, users regis
 
 ### Creating user accounts
 
-When a new user signs up for the application, [ledger accounts must be created](https://developer.tatum.io/rest/virtual-accounts/create-new-account) for them. Every user should have an account for every supported blockchain asset in the exchange. Every account should be created with the external ID of the customer. This makes it possible to list all accounts for the specific customer. An account should also have the accounting currency set up correctly.
+When a new user signs up for the application, [ledger accounts must be created](https://docs.tatum.io/rest/virtual-accounts/create-new-account) for them. Every user should have an account for every supported blockchain asset in the exchange. Every account should be created with the external ID of the customer. This makes it possible to list all accounts for the specific customer. An account should also have the accounting currency set up correctly.
 
 <div class="toolbar-note">
 The customer's external ID should be a unique identifier of the user in your application, e.g., your ID or the hash.
@@ -158,7 +158,7 @@ curl --location --request POST 'https://api-eu1.tatum.io/v3/ledger/account' \
 
 ### Generating a blockchain deposit address for the account
 
-Once the account is created, it is not yet synchronized with the blockchain. There is no blockchain address connected to it, only a blockchain wallet, from which addresses will be chosen. To connect a specific address, you need to generate the account's address using the off-chain method [Generate address for the account](https://developer.tatum.io/rest/virtual-accounts/create-new-deposit-address).
+Once the account is created, it is not yet synchronized with the blockchain. There is no blockchain address connected to it, only a blockchain wallet, from which addresses will be chosen. To connect a specific address, you need to generate the account's address using the off-chain method [Generate address for the account](https://docs.tatum.io/rest/virtual-accounts/create-new-deposit-address).
 
 <div class='tabbed-code-blocks'>
 ```Request
@@ -179,7 +179,7 @@ The result is a blockchain address that has been connected to the ledger account
 
 ### Enabling notifications for incoming blockchain transactions
 
-It is possible to [enable webhook notifications for every incoming transaction](https://developer.tatum.io/rest/subscriptions/create-new-subscription) to the account. This notification is fired as an HTTP POST request with a JSON body and contains fields like the transaction amount, currency, and account of the incoming transaction. Users should see somewhere in their wallet page that there are pending incoming transactions - their crypto deposits.
+It is possible to [enable webhook notifications for every incoming transaction](https://docs.tatum.io/rest/subscriptions/create-new-subscription) to the account. This notification is fired as an HTTP POST request with a JSON body and contains fields like the transaction amount, currency, and account of the incoming transaction. Users should see somewhere in their wallet page that there are pending incoming transactions - their crypto deposits.
 
 <div class='tabbed-code-blocks'>
 ```Request
@@ -213,7 +213,7 @@ The user has successfully signed up, accounts and deposit addresses for all supp
 
 ### List of the user's accounts with balances
 
-When the user signs in to the application, a [list of their accounts](https://developer.tatum.io/rest/virtual-accounts/list-all-customer-accounts) should be visible. We can obtain all accounts for one user using his customer ID.
+When the user signs in to the application, a [list of their accounts](https://docs.tatum.io/rest/virtual-accounts/list-all-customer-accounts) should be visible. We can obtain all accounts for one user using his customer ID.
 
 <div class="toolbar-note">
 The account's balance is available in the accounts list by default and does not have to be queried separately. There are two types of balances: 
@@ -247,7 +247,7 @@ curl --location --request GET 'https://api-eu1.tatum.io/v3/ledger/account/custom
 
 ### List of recent transactions in any account
 
-Usually, the [last transactions that happened in any of the accounts](https://developer.tatum.io/rest/virtual-accounts/find-transactions-for-a-customer-across-all-of-the-customer-s-accounts) are presented as well.
+Usually, the [last transactions that happened in any of the accounts](https://docs.tatum.io/rest/virtual-accounts/find-transactions-for-a-customer-across-all-of-the-customer-s-accounts) are presented as well.
 
 
 <div class='tabbed-code-blocks'>
@@ -283,11 +283,11 @@ curl --location --request POST 'https://api-eu1.tatum.io/v3/ledger/transaction/c
 ```
 </div>
 
-The user can see the [details of the account](https://developer.tatum.io/rest/virtual-accounts/get-account-by-id) and [transactions connected only to this account](https://developer.tatum.io/rest/virtual-accounts/find-transactions-for-account). 
+The user can see the [details of the account](https://docs.tatum.io/rest/virtual-accounts/get-account-by-id) and [transactions connected only to this account](https://docs.tatum.io/rest/virtual-accounts/find-transactions-for-account). 
 
 ### Obtaining the deposit address for an account
 
-Usually, it is good to [display the blockchain addresses](https://developer.tatum.io/rest/virtual-accounts/get-all-deposit-addresses-for-account) connected to this account to send a blockchain transaction to the exchange.
+Usually, it is good to [display the blockchain addresses](https://docs.tatum.io/rest/virtual-accounts/get-all-deposit-addresses-for-account) connected to this account to send a blockchain transaction to the exchange.
 
 <div class='tabbed-code-blocks'>
 ```Request
@@ -305,7 +305,7 @@ curl --location --request GET 'https://api-eu1.tatum.io/v3/offchain/account/5fb7
 
 ### Withdrawing funds from the exchange to the blockchain
 
-For every blockchain, there is a specific [API call](https://developer.tatum.io/rest/virtual-accounts/send-bitcoin-from-tatum-account-to-address) for performing withdrawals. We will cover Bitcoin in this section, but it works similarly in others. 
+For every blockchain, there is a specific [API call](https://docs.tatum.io/rest/virtual-accounts/send-bitcoin-from-tatum-account-to-address) for performing withdrawals. We will cover Bitcoin in this section, but it works similarly in others. 
 
 <div class='tabbed-code-blocks'>
 ```Request
@@ -377,7 +377,7 @@ Every trade must be filled and closed at some point. It is possible to fill only
 A ledger transaction is performed for every partial fill of a trade, and assets are transferred to the ledger accounts associated with the trade. Also, the blockage is decreased accordingly.
 </div>
 
-Enough of the theory, [let's open a BUY trade](https://developer.tatum.io/rest/exchange/store-buy-sell-trade).
+Enough of the theory, [let's open a BUY trade](https://docs.tatum.io/rest/exchange/store-buy-sell-trade).
 
 <div class='tabbed-code-blocks'>
 ```Request
@@ -400,7 +400,7 @@ curl --location --request POST 'https://api-eu1.tatum.io/v3/trade' \
 ```
 </div>
 
-The response is the ID of this open trade. When you [list the blockages](https://developer.tatum.io/rest/virtual-accounts/get-blocked-amounts-in-an-account) on the ETH account, you will see that there is a blockage of 40 ETH. Additional information is present in the blockage, such as the trade ID as a description.
+The response is the ID of this open trade. When you [list the blockages](https://docs.tatum.io/rest/virtual-accounts/get-blocked-amounts-in-an-account) on the ETH account, you will see that there is a blockage of 40 ETH. Additional information is present in the blockage, such as the trade ID as a description.
 
 <div class='tabbed-code-blocks'>
 ```Request
@@ -425,7 +425,7 @@ No transaction has been performed yet, only the blockage.
 
 ### Listing open trades
 
-When you have open trades that are not yet filled, you can list them using the List active trades endpoint. You can [list open BUY](https://developer.tatum.io/rest/exchange/list-all-active-buy-trades) and [SELL](https://developer.tatum.io/rest/exchange/list-all-active-sell-trades) trades using two different endpoints. Keep in mind that by using these endpoints, you list either all open trades across all pairs or only trades for a specific account by providing the account's ID as a query parameter.
+When you have open trades that are not yet filled, you can list them using the List active trades endpoint. You can [list open BUY](https://docs.tatum.io/rest/exchange/list-all-active-buy-trades) and [SELL](https://docs.tatum.io/rest/exchange/list-all-active-sell-trades) trades using two different endpoints. Keep in mind that by using these endpoints, you list either all open trades across all pairs or only trades for a specific account by providing the account's ID as a query parameter.
 
 <div class='tabbed-code-blocks'>
 ```Request
@@ -503,7 +503,7 @@ The fee can be executed by providing a fee and feeAccountId property when openin
 
 When the trade is closed, there are two ledger transactions. The first one is between accounts of the trading pair's first currency. The second one is between accounts of the second currency in the trading pair. In BTC/ETH example, there is a ledger-to-ledger transaction of BTC and a ledger-to-ledger ETH transaction. Blockages on both trades are deleted, the trade is not active anymore, and it is moved to historical trades.
 
-To see the list of closed trades, you can call the [List all closed trades](https://developer.tatum.io/rest/exchange/list-all-historical-trades) endpoint.
+To see the list of closed trades, you can call the [List all closed trades](https://docs.tatum.io/rest/exchange/list-all-historical-trades) endpoint.
 
 <div class='tabbed-code-blocks'>
 ```Request

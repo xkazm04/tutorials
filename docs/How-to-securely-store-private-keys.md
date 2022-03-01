@@ -47,7 +47,7 @@ Tatum KMS is shipped as a Node.JS binary, and Node.JS 14+ should be installed on
 
 ## How to use KMS
 
-In this guide, we’ll learn how to generate wallets, private keys, blockchain addresses, and sign transactions locally using KMS. We’ll be working on the Bitcoin testnet, but the same process applies to any [supported blockchain](https://developer.tatum.io/rest/getting-started/supported-blockchains) in Tatum.
+In this guide, we’ll learn how to generate wallets, private keys, blockchain addresses, and sign transactions locally using KMS. We’ll be working on the Bitcoin testnet, but the same process applies to any [supported blockchain](https://docs.tatum.io/rest/getting-started/supported-blockchains) in Tatum.
 
 ### 1. Download and install KMS
 
@@ -196,7 +196,7 @@ You need to enter the password for unlocking the wallet storage. It is required 
 
 ### 8. Send an API request to Tatum to perform a transaction
 
-Now you can send bitcoin from your address to any other address. To do so, send a [bitcoin transaction](https://developer.tatum.io/rest/blockchain/send-bitcoin-to-blockchain-addresses) API request to Tatum. Instead of a **privateKey** you should enter a **signatureId** field that contains your signature ID from step 5:
+Now you can send bitcoin from your address to any other address. To do so, send a [bitcoin transaction](https://docs.tatum.io/rest/blockchain/send-bitcoin-to-blockchain-addresses) API request to Tatum. Instead of a **privateKey** you should enter a **signatureId** field that contains your signature ID from step 5:
 
 ```Request
 curl --location --request POST 'https://api-eu1.tatum.io/v3/bitcoin/transaction' \
@@ -222,7 +222,7 @@ curl --location --request POST 'https://api-eu1.tatum.io/v3/bitcoin/transaction'
 As you can see, there was no private key or mnemonic anywhere in the request, nor was any other sensitive information required.
 <div class="toolbar-note">
 Be aware that there is a change in the behavior of this operation. The transaction is not yet signed and sent to the blockchain. It is waiting in the Tatum to be processed by the KMS. 
-**When the KMS [detects a new pending transaction](https://developer.tatum.io/rest/custody/get-pending-transactions-to-sign), it signs it locally and sends it to the blockchain. It must [also mark the transaction as processed](https://developer.tatum.io/rest/custody/complete-pending-transaction-to-sign) so that it will not be sent to the blockchain again.‌**
+**When the KMS [detects a new pending transaction](https://docs.tatum.io/rest/custody/get-pending-transactions-to-sign), it signs it locally and sends it to the blockchain. It must [also mark the transaction as processed](https://docs.tatum.io/rest/custody/complete-pending-transaction-to-sign) so that it will not be sent to the blockchain again.‌**
 </div>
 
 When KMS picks up the pending transaction, it will output something like:
@@ -245,7 +245,7 @@ Processing pending transaction - {
 
 ### 9. Get transaction details
 
-Using the KMS transaction ID from the id field of the response to the previous request (“61fe7c68cf2fbc595cbb89dd” in our case above), you can now use the [Get transaction details](https://developer.tatum.io/rest/custody/get-transaction-details) endpoint to get the details of the transaction you have just performed:
+Using the KMS transaction ID from the id field of the response to the previous request (“61fe7c68cf2fbc595cbb89dd” in our case above), you can now use the [Get transaction details](https://docs.tatum.io/rest/custody/get-transaction-details) endpoint to get the details of the transaction you have just performed:
 
 ```Request
 curl --request GET
@@ -274,7 +274,7 @@ The response contains a Bitcoin transaction ID in the txId field (“f7572ef070d
 
 ### Other KMS features
 
-KMS can be used to securely sign any transaction with a **signatureId** instead of a **privateKey** or **mnemonic**. This includes deploying [NFT smart contracts](https://developer.tatum.io/rest/smart-contracts/deploy-nft-smart-contract), [minting NFTs](https://developer.tatum.io/rest/smart-contracts/mint-nft), transferring [ERC-20](https://developer.tatum.io/rest/smart-contracts/transfer-erc-20-token), [ERC-721](https://developer.tatum.io/rest/smart-contracts/transfer-nft-token), and [ERC-1155 tokens](https://developer.tatum.io/rest/smart-contracts/transfer-multi-token-token), and any other transaction that requires a private key or mnemonic to be signed.
+KMS can be used to securely sign any transaction with a **signatureId** instead of a **privateKey** or **mnemonic**. This includes deploying [NFT smart contracts](https://docs.tatum.io/rest/smart-contracts/deploy-nft-smart-contract), [minting NFTs](https://docs.tatum.io/rest/smart-contracts/mint-nft), transferring [ERC-20](https://docs.tatum.io/rest/smart-contracts/transfer-erc-20-token), [ERC-721](https://docs.tatum.io/rest/smart-contracts/transfer-nft-token), and [ERC-1155 tokens](https://docs.tatum.io/rest/smart-contracts/transfer-multi-token-token), and any other transaction that requires a private key or mnemonic to be signed.
 
 <div class="toolbar-note">
 Be aware that there are **two types of signature IDs** generated by KMS: mnemonic signature IDs and private key signature IDs.
@@ -282,7 +282,7 @@ Be aware that there are **two types of signature IDs** generated by KMS: mnemoni
 - Whenever there is a mnemonic is required to sign a transaction, you need to replace the **mnemonic** field with a **signatureId** field containing the **signature ID of the mnemonic** from the wallet storage.
 </div>
 
-You can also use KMS to [get a list of pending transactions to sign](https://developer.tatum.io/rest/custody/get-pending-transactions-to-sign), [complete pending transactions to sign](https://developer.tatum.io/rest/custody/complete-pending-transaction-to-sign), and [delete transactions waiting to be signed](https://developer.tatum.io/rest/custody/delete-pending-transaction-to-sign). For a full list of API calls available for Tatum KMS, please refer to our [API documentation](https://developer.tatum.io/rest/custody/custody).
+You can also use KMS to [get a list of pending transactions to sign](https://docs.tatum.io/rest/custody/get-pending-transactions-to-sign), [complete pending transactions to sign](https://docs.tatum.io/rest/custody/complete-pending-transaction-to-sign), and [delete transactions waiting to be signed](https://docs.tatum.io/rest/custody/delete-pending-transaction-to-sign). For a full list of API calls available for Tatum KMS, please refer to our [API documentation](https://docs.tatum.io/rest/custody/custody).
 
 Tatum KMS also supports integrations to [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/) or [VGS](https://www.verygoodsecurity.com/) so that you can store your keys and mnemonics there. More information can be found on the [Tatum KMS GitHub pages](https://github.com/tatumio/tatum-kms), where all of the source code is available.
 

@@ -45,7 +45,7 @@ import {
 
 ## Deploy your own marketplace
 
-The first step is to [create your own marketplace smart contract](https://developer.tatum.io/rest/smart-contracts/create-nft-marketplace). This is a one-time operation, and the marketplace you deploy will be used for every listing in your application. In this example, we'll deploy our marketplace on the Celo blockchain.
+The first step is to [create your own marketplace smart contract](https://docs.tatum.io/rest/smart-contracts/create-nft-marketplace). This is a one-time operation, and the marketplace you deploy will be used for every listing in your application. In this example, we'll deploy our marketplace on the Celo blockchain.
 
 
 <div class='tabbed-code-blocks'>
@@ -111,7 +111,7 @@ chain - The blockchain on which the marketplace smart contract will be deployed.
 }
 ```
 
-The response is a transaction ID from which we can [obtain the contract address](https://developer.tatum.io/rest/smart-contracts/get-contract-address-from-transaction). 
+The response is a transaction ID from which we can [obtain the contract address](https://docs.tatum.io/rest/smart-contracts/get-contract-address-from-transaction). 
 
 ---
 
@@ -124,7 +124,7 @@ Every listing must have a unique `listingId`. This parameter identifies the list
 <!-- theme: info -->
 >To use an ERC-20 token as a listing currency, the seller should add an `erc20Address` parameter to the call with the address of the smart contract of the ERC-20 token that is used for the listing.
 
-[The following API call](https://developer.tatum.io/rest/smart-contracts/sell-asset-on-the-nft-marketplace) will create a fixed-price NFT listing on your marketplace:
+[The following API call](https://docs.tatum.io/rest/smart-contracts/sell-asset-on-the-nft-marketplace) will create a fixed-price NFT listing on your marketplace:
 
 <div class='tabbed-code-blocks'>
 ```SDK
@@ -299,7 +299,7 @@ The body of the API request should contain the following parameters:
 
 ## Approve ERC-20 for spending and for cashback
 
-For a listing for an NFT being sold for ERC-20 tokens, the buyer [must approve the marketplace to spend his ERC-20 tokens](https://developer.tatum.io/rest/smart-contracts/approve-spending-of-erc-20) before the actual buy operation. Here is the call to approve the marketplace for spending the ERC-20 token:
+For a listing for an NFT being sold for ERC-20 tokens, the buyer [must approve the marketplace to spend his ERC-20 tokens](https://docs.tatum.io/rest/smart-contracts/approve-spending-of-erc-20) before the actual buy operation. Here is the call to approve the marketplace for spending the ERC-20 token:
 
 <div class='tabbed-code-blocks'>
 ```SDK
@@ -378,7 +378,7 @@ Once the token is in the marketplace, it can be purchased by any buyer with enou
 The listing in the example is for 1 CELO and the fee is 1.5%, so the buyer would have to spend 1.015 CELO to buy the asset.
 </div>
 
-Use [the following API call](https://developer.tatum.io/rest/smart-contracts/buy-asset-on-the-nft-marketplace) to purchase an NFT from a listing on the marketplace:
+Use [the following API call](https://docs.tatum.io/rest/smart-contracts/buy-asset-on-the-nft-marketplace) to purchase an NFT from a listing on the marketplace:
 
 <div class='tabbed-code-blocks'>
 ```SDK

@@ -1,207 +1,296 @@
-# How to use Tatum and MetaMask
+# How to securely store private keys & sign transactions
 
-*Connect MetaMask and leverage Tatum's  abstraction in no time*
-
----
-
-In a custodial app, you manage your users' private keys and transfer assets on their behalf. In a non-custodial app, users have their own wallets that hold their private keys.
-
-If you build a non-custodial application, most of your users will probably use MetaMask as their primary wallet. You can easily use Tatum to connect your users' MetaMask wallets to your app and leverage our abstraction, ready-to-go contracts, and simple transfers in a few easy steps.
+*Set up Tatum KMS to manage your keys*
 
 ---
 
-## Connect your MetaMask to a web page
+## What is KMS?
 
-The first step is to connect your web app with MetaMask. To do so, we'll create an Enable button on your web page that will request the accounts handled by MetaMask.
+Tatum Key Management System (KMS) is a comprehensive solution for building custodial apps. In custodial apps, you control your app’s end-users’ private keys and wallet mnemonics. Blockchain transactions are signed locally, and sensitive data is not sent over the Internet.
 
-
-```html
-<button class="enableMetamask">Enable MetaMask</button>
-```
-<div class='tabbed-code-blocks'>
-```JS
-let accounts = [];
-document.querySelector('.enableMetamask')
-.addEventListener('click', async () => {
-    accounts = await ethereum.request({
-      method: 'eth_requestAccounts'
-    });
-    console.log(accounts);
-});
-```
-</div>
-When a user clicks on the **Enable** button, the MetaMask UI will prompt you for a connection. It will then expose the managed accounts to the web app. 
-
-In this example, we are assuming that MetaMask is installed as a Chrome extension. For more complex scenarios, take a look at these [official MetaMask guides](https://docs.metamask.io/guide/create-dapp.html#basic-action-part-1).
+With KMS, you can easily build and scale custodial apps, provide the highest level of security for your users, and allow them to use blockchain technology without having to deal with private keys and mnemonics. End-users can simply log in to your app with their credentials, and KMS takes care of the rest.
 
 ---
 
-## Prepare a transaction using Tatum
+## Private keys & mnemonics
 
-Next, we will leverage a functionality Tatum uses for its Key Management System (KMS) tool to prepare a transaction for MetaMask. We will assemble it in KMS using a `signatureId`, but we will prepare the transaction configuration instead of signing it and broadcasting it to the blockchain.
-In this example, we'll deploy an NFT smart contract on the Polygon Mumbai testnet.
+Private keys and mnemonics are the only things that can unlock your crypto assets and approve transactions. If you lose access to them, you will lose access to your assets forever. Also, when someone else obtains access to your keys, they can steal all your funds. This is something that you must keep in mind to run your business successfully.
 
-<div class='tabbed-code-blocks'>
-```Example
-// 1. Let's call the Deploy NFT with the signatureId present
-//    You can use any arbitrary UUID v4 string as a signatureId
-const response = await axios.post('https://api-eu1.tatum.io/v3/nft/deploy/', {
-  "name": "Test Token",
-  "chain": "MATIC",
-  "symbol": "TTC",
-  "signatureId": "b7ad58f7-d826-4db5-8a52-4f492935a7b4"
-}, {
-  headers: {
-    'x-api-key': '951cabe04de143b98b75c4d4ed4d2d99'
-  }
-});
-// 2. Response is the ID of the prepared transaction
-const {
-  signatureId
-} = response.data;
-// 3. Let's grab the transaction and get the configuration
-const {
-  data
-} = await axios.get('https://api-eu1.tatum.io/v3/kms/' + signatureId, {
-  headers: {
-    'x-api-key': '951cabe04de143b98b75c4d4ed4d2d99'
-  }
-});
-```
+<div class="toolbar-caution">
+**NEVER** give access to your mnemonics or private keys to anyone. Your private keys should 
+**NEVER** leave your secure perimeter and should not be sent over the Internet, not even via HTTPS connection. Tatum will never ask for your keys or mnemonics, and you should NEVER send them to the Tatum API.
 </div>
 
-1. First, we'll invoke the [Deploy NFT](https://developer.tatum.io/rest/smart-contracts/deploy-nft-smart-contract) operation. We will use a `signatureId` in the call, which can be any arbitrary UUID v4 string. Again, we will not sign the transaction and broadcast it to the blockchain. We will only prepare the transaction config.
+There are public endpoints on Tatum API which accept or produce sensitive information like private key or mnemonics. These endpoints are only present for test use and quick prototyping, not for production usage. For production usage, you should leverage Tatum KMS to generate private keys, mnemonics, and sign transactions locally and securely.
 
-<div class='tabbed-code-blocks'>
-```Example
-const response = await axios.post('https://api-eu1.tatum.io/v3/nft/deploy/', {
-  "name": "Test Token",
-  "chain": "MATIC",
-  "symbol": "TTC",
-  "signatureId": "b7ad58f7-d826-4db5-8a52-4f492935a7b4"
-}, {
-  headers: {
-    'x-api-key': '951cabe04de143b98b75c4d4ed4d2d99'
-  }
-});
-```
-</div>
-
-2. The response is the `signatureId` - the identifier of the prepared transaction that is waiting to be signed.
-
-
-```Example
-const {
-  signatureId
-} = response.data;
-```
-
-
-3. Next, we'll grab the pending transaction.
-
-<div class='tabbed-code-blocks'>
-```Example
-const {
-  data
-} = await axios.get('https://api-eu1.tatum.io/v3/kms/' + signatureId, {
-  headers: {
-    'x-api-key': '951cabe04de143b98b75c4d4ed4d2d99'
-  }
-});
-```
+<div class="toolbar-caution">
+Whenever a **privateKey** or **mnemonic** field is present in an API endpoint in Tatum, you should replace them with a **signatureId** generated by KMS.
 </div>
 
 ---
 
-## Send the transaction to MetaMask for signature
+## How does KMS work?
 
-Now that we have prepared the transaction using KMS, we need to perform a few operations to get it ready for MetaMask.
+Tatum KMS stores all your mnemonics and private keys in a wallet storage file. This storage file is an AEC encrypted file, for which only you know the encryption key. 
 
-We need to get the transaction configuration, set the correct sender account, and convert the gas price to be compatible with Metamask.
+Every wallet that is stored inside your KMS has a unique identifier, called **signatureId**. This signatureId is used in communication with Tatum API and represents the wallet used by the specific operation.
 
-1. First, let's get the transaction configuration.
+When you generate and store all the wallets you want to work with, you then enable the daemon mode in the KMS. This daemon mode periodically checks for the pending transactions to sign. 
 
+Every pending transaction has a signatureId present. When the pending transaction is matched with the wallet storage's specific wallet, it is signed locally and sent to the blockchain. Your wallet data are stored only in memory.
 
-````Example
-const txConfig = JSON.parse(data.serializedTransaction);
-````
+<div class="toolbar-note">
+Tatum KMS is shipped as a Node.JS binary, and Node.JS 14+ should be installed on your server. It is a command-line tool and provides two modes of operation:
+- **daemon mode** is responsible for periodically pulling pending transactions from the Tatum API
+- **CLI mode** is used to generate wallets or private keys
+</div>
 
+## How to use KMS
 
-2. Next, we'll set the correct sender account.
+In this guide, we’ll learn how to generate wallets, private keys, blockchain addresses, and sign transactions locally using KMS. We’ll be working on the Bitcoin testnet, but the same process applies to any [supported blockchain](https://docs.tatum.io/rest/getting-started/supported-blockchains) in Tatum.
 
+### 1. Download and install KMS
 
-````Example
-txConfig.from = accounts[0];
-````
+1. First, head over to the Tatum GitHub and [download KMS](https://github.com/tatumio/tatum-kms).
+2. Next, use the following code to install KMS:
 
-
-3. Now, we'll convert the `gasPrice` from the decimal gwei format Tatum uses to the HEX gwei format that MetaMask uses.
-
-
-```Example
-txConfig.gasPrice = txConfig.gasPrice ? 
-parseInt(txConfig.gasPrice).toString(16) : undefined;
+```Your local server
+npm i -g @tatumio/tatum-kms
 ```
 
+For more specifics regarding installation, please consult the [Readme](https://github.com/tatumio/tatum-kms/blob/master/README.md) included in the GitHub repo.
 
-4. And finally, let's send the transaction to MetaMask.
+### 2. Generate a managed wallet
+
+To generate a wallet that is managed by the KMS, use the generatemanagedwallet command in CLI mode. 
+
+```Response
+tatum-kms --path=wallet.dat --testnet generatemanagedwallet BTC
+
+Enter password to access wallet storage:*****ta
+```
+
+The first time you use KMS, you will be prompted to enter a password to encrypt your data. This password is created the first time you enter it, and you should store it in a safe place.
+
+<div class="toolbar-caution">
+> The wallet storage is encrypted with an AEC cipher and is stored on your local server. The password you provide is used to encrypt the mnemonics and private keys inside. If you lose your password, you will lose access to your mnemonics.
+</div>
+
+The response will look like this, and will contain your **wallet mnemonic's signature ID** as the first parameter:
+
+```Response
+{
+  "xxx-59be-4792-81c5-yyy": {
+    "mnemonic": "list of long words",
+    "xpub": "tpubBCDEF",
+    "chain": "BTC",
+    "testnet": true
+  }
+}
+```
+
+### 3. Create a private key
+
+Next, we will generate a private key for our wallet locally. Private keys are used to authorize the transfer of funds from blockchain addresses. Use the getprivatekey command to generate one:
+
+```Request
+tatum-kms --path=wallet.dat --testnet getprivatekey xxx-59be-4792–81c5-yyy 0
+```
+
+The parameters required are:
+- Your wallet mnemonic's **signature ID** —the first parameter in the response to step 2 
+- The **derivation index** of the private key you are generating — this can be any value, but it must be unique to the wallet you are generating. Starting at “0” and working chronologically is a good idea.
+The response will be the private key of the derivation index you have specified:
+
+```Response
+{
+  "privateKey": "XXXNAV3tX3vWPG4uThixuqdYYY"
+}
+
+```
+
+### 4. Generate an address
+
+Next, we’ll create an address for the private key we have just generated. You can receive funds to the address and use the private key to send them from the address. 
+Use the **getaddress command** to generate an address for the same derivation index (0) we specified in step 3:
+
+```Request
+tatum-kms --path=wallet.dat --testnet getaddress xxx-59be-4792–81c5-yyy 0
+```
+
+The parameters required are:
+- Your wallet mnemonic's **signature ID** —the same as above 
+- The **derivation index** of the address you are generating — the same derivation index you specified in step 3.
+The response will contain the address you have just generated:
+
+```Response
+{
+  "address": "AAAA3JPvMuwgpKovMTjBBB"
+}
+
+```
+
+### 5. Store the private key to your wallet
+
+Now, we will store the private key we have just generated to the wallet. Use the **storemanagedprivatekey** command to do so:
+
+```Request
+tatum-kms --path=wallet.dat --testnet storemanagedprivatekey BTC
+```
+
+You will be prompted to enter the private key you generated above, and the password you created at the beginning:
+
+```Enter password + private key
+Enter private key to store:XXXNAV3tX3vWPG4uThixuqdYYY
+
+Enter password to access wallet store:******
+```
+
+The response will contain the signature ID of the private key, which you can then use to sign transactions.
+
+```Response
+{
+ "signatureId": "QQQ-4b41-4ec9-b66c-WWW"
+}
+```
+
+Now, let’s export our wallet and have a look. Enter the following to export:
+
+```Request
+tatum-kms --path=wallet.dat --testnet export
+```
+
+You'll again be prompted to enter your password, and the response will give you details about your wallet:
+
+```Response
+{
+ "QQQ-4b41-4ec9-b66c-WWW": {
+   "privateKey": "XXXNAV3tX3vWPG4uThixuqdYYY",
+   "chain": "BTC",
+   "testnet": true
+ },
+ "xxx-59be-4792-81c5-yyy": {
+   "mnemonic": "list of long words",
+   "xpub": "tpubBCDEF",
+   "chain": "BTC",
+   "testnet": true
+ }
+}
+
+```
+
+### 6. Send some test BTC to your new address
+
+Now, use a Bitcoin testnet faucet to send some test BTC to your address. You can use any faucet you’d like, [here’s a mobile faucet](https://play.google.com/store/apps/details?id=de.schildbach.wallet_test) that works well.
+Send the test BTC to the Bitcoin address you generated in step 4:  AAAA3JPvMuwgpKovMTjBBB
+
+### 7. Enable daemon mode
+
+Daemon mode is basically background mode. When enabled, Tatum-KMS will work in the background and listen for pending transactions. To enable daemon mode, enter the following code:
+
+```Your local server
+tatum-kms daemon --path=wallet.dat --testnet --chain=BTC --api-key=your-testnet-api-key --period=10
+```
+
+You need to enter the password for unlocking the wallet storage. It is required whenever you start the daemon. If your daemon stops, you need to enter the password again when you start it up again.
+
+### 8. Send an API request to Tatum to perform a transaction
+
+Now you can send bitcoin from your address to any other address. To do so, send a [bitcoin transaction](https://docs.tatum.io/rest/blockchain/send-bitcoin-to-blockchain-addresses) API request to Tatum. Instead of a **privateKey** you should enter a **signatureId** field that contains your signature ID from step 5:
+
+```Request
+curl --location --request POST 'https://api-eu1.tatum.io/v3/bitcoin/transaction' \
+--header 'x-api-key: your-tesnet-api-key-from-tatum' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+   "fromAddress": [
+       {
+           "address": "AAAA3JPvMuwgpKovMTjBBB", -> FROM STEP 4
+           "signatureId": "QQQ-4b41-4ec9-b66c-WWW" -> FROM STEP 5
+       }
+   ],
+   "to": [
+       {
+           "address": "any-existing-testnet-bitcoin-address",
+           "value": 0.00001 -> AMOUNT OF BTC TO SEND
+       }
+   ]
+}'
+
+```
+
+As you can see, there was no private key or mnemonic anywhere in the request, nor was any other sensitive information required.
+<div class="toolbar-note">
+Be aware that there is a change in the behavior of this operation. The transaction is not yet signed and sent to the blockchain. It is waiting in the Tatum to be processed by the KMS. 
+**When the KMS [detects a new pending transaction](https://docs.tatum.io/rest/custody/get-pending-transactions-to-sign), it signs it locally and sends it to the blockchain. It must [also mark the transaction as processed](https://docs.tatum.io/rest/custody/complete-pending-transaction-to-sign) so that it will not be sent to the blockchain again.‌**
+</div>
+
+When KMS picks up the pending transaction, it will output something like:
 
 <div class='tabbed-code-blocks'>
-```Example
-console.log(await ethereum.request({
-  method: 'eth_sendTransaction',
-  params: [txConfig],
-}));
+```Response
+Processing pending transaction - {
+"withdrawalId": null,
+"chain": "BTC",
+"serializedTransaction": "{\"hash\":\"81e62bdfbfc7bcb66c2a2f17335d033fd98b84c1188a7bb379a2dce9f1cda989\",\"version\":2,\"inputs\":[{\"prevTxId\":\"121702fd7acd1b2cca6bd19658009140730ba26ca67cd222c00f952a111e11f4\",\"outputIndex\":0,\"sequenceNumber\":4294967295,\"script\":\"\",\"scriptString\":\"\",\"output\":{\"satoshis\":2000,\"script\":\"76a914c8e668ee829837a2355c1e234a41f53f86b8156c88ac\"}}],\"outputs\":[{\"satoshis\":1000,\"script\":\"001487c70889f0a1d2f632d216a01472dde71f062aa7\"}],\"nLockTime\":0}",
+"hashes": [
+"b8eb99cd-ba04-4031-a65f-11d6420ebdd1"
+],
+"index": null,
+"withdrawalResponses": null,
+"id": "61fe7c68cf2fbc595cbb89dd"
+}.
 ```
 </div>
 
-Below, all the steps of **Deploying an NFT** are assembled together.
+### 9. Get transaction details
 
-<div class='tabbed-code-blocks'>
-```Example
-// 1. Let's call the Deploy NFT with the signatureId present
-//    You can use any arbitrary UUID v4 string as a signatureId
-const response = await axios.post('https://api-eu1.tatum.io/v3/nft/deploy/', {
-  "name": "Test Token",
-  "chain": "MATIC",
-  "symbol": "TTC",
-  "signatureId": "b7ad58f7-d826-4db5-8a52-4f492935a7b4"
-}, {
-  headers: {
-    'x-api-key': '951cabe04de143b98b75c4d4ed4d2d99'
-  }
-});
-// 2. Response is the ID of the prepared transaction
-const {
-  signatureId
-} = response.data;
-// 3. Let's grab the transaction and get the configuration
-const {
-  data
-} = await axios.get('https://api-eu1.tatum.io/v3/kms/' + signatureId, {
-  headers: {
-    'x-api-key': '951cabe04de143b98b75c4d4ed4d2d99'
-  }
-});
-// 4. Get the transaction config
-const txConfig = JSON.parse(data.serializedTransaction);
-// 5. Set the correct sender account
-txConfig.from = accounts[0];
-// 6. Put gas price in HEX
-txConfig.gasPrice = txConfig.gasPrice ? parseInt(txConfig.gasPrice).toString(16) : undefined;
-// 7. Send tx to MetaMask
-console.log(await ethereum.request({
-  method: 'eth_sendTransaction',
-  params: [txConfig],
-}));
+Using the KMS transaction ID from the id field of the response to the previous request (“61fe7c68cf2fbc595cbb89dd” in our case above), you can now use the [Get transaction details](https://docs.tatum.io/rest/custody/get-transaction-details) endpoint to get the details of the transaction you have just performed:
+
+```Request
+curl --request GET
+--url https://api-eu1.tatum.io/v3/kms/61fe7c68cf2fbc595cbb89dd
+--header 'x-api-key: your-testnet-api-key-from-tatum'Example usage of the API with Tatum KMS
 ```
+
+The response will contain the details of your transaction:
+
+```Response
+{
+ "withdrawalId": null,
+ "chain": "BTC",
+ "serializedTransaction": "{\"hash\":\"81e62bdfbfc7bcb66c2a2f17335d033fd98b84c1188a7bb379a2dce9f1cda989\",\"version\":2,\"inputs\":[{\"prevTxId\":\"121702fd7acd1b2cca6bd19658009140730ba26ca67cd222c00f952a111e11f4\",\"outputIndex\":0,\"sequenceNumber\":4294967295,\"script\":\"\",\"scriptString\":\"\",\"output\":{\"satoshis\":2000,\"script\":\"76a914c8e668ee829837a2355c1e234a41f53f86b8156c88ac\"}}],\"outputs\":[{\"satoshis\":1000,\"script\":\"001487c70889f0a1d2f632d216a01472dde71f062aa7\"}],\"nLockTime\":0}",
+ "hashes": [
+   "b8eb99cd-ba04-4031-a65f-11d6420ebdd1"
+ ],
+ "index": null,
+ "withdrawalResponses": null,
+ "txId": "f7572ef070d381612b7594940cc73ec008e796b37a73ff031f3855d2a23c9ade",
+ "id": "61fe7c68cf2fbc595cbb89dd"
+
+```
+
+The response contains a Bitcoin transaction ID in the txId field (“f7572ef070d381612b7594940cc73ec008e796b37a73ff031f3855d2a23c9ade” in our case), which you can use to view the blockchain transaction in any [Bitcoin blockchain explorer](https://live.blockcypher.com/btc-testnet/tx/f7572ef070d381612b7594940cc73ec008e796b37a73ff031f3855d2a23c9ade/).
+
+### Other KMS features
+
+KMS can be used to securely sign any transaction with a **signatureId** instead of a **privateKey** or **mnemonic**. This includes deploying [NFT smart contracts](https://docs.tatum.io/rest/smart-contracts/deploy-nft-smart-contract), [minting NFTs](https://docs.tatum.io/rest/smart-contracts/mint-nft), transferring [ERC-20](https://docs.tatum.io/rest/smart-contracts/transfer-erc-20-token), [ERC-721](https://docs.tatum.io/rest/smart-contracts/transfer-nft-token), and [ERC-1155 tokens](https://docs.tatum.io/rest/smart-contracts/transfer-multi-token-token), and any other transaction that requires a private key or mnemonic to be signed.
+
+<div class="toolbar-note">
+Be aware that there are **two types of signature IDs** generated by KMS: mnemonic signature IDs and private key signature IDs.
+- Any time a private key is required for a request, you need to replace the **privateKey** field with a **signatureId** field that contains the **signature ID of the private key** from the wallet storage.
+- Whenever there is a mnemonic is required to sign a transaction, you need to replace the **mnemonic** field with a **signatureId** field containing the **signature ID of the mnemonic** from the wallet storage.
 </div>
+
+You can also use KMS to [get a list of pending transactions to sign](https://docs.tatum.io/rest/custody/get-pending-transactions-to-sign), [complete pending transactions to sign](https://docs.tatum.io/rest/custody/complete-pending-transaction-to-sign), and [delete transactions waiting to be signed](https://docs.tatum.io/rest/custody/delete-pending-transaction-to-sign). For a full list of API calls available for Tatum KMS, please refer to our [API documentation](https://docs.tatum.io/rest/custody/custody).
+
+Tatum KMS also supports integrations to [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/) or [VGS](https://www.verygoodsecurity.com/) so that you can store your keys and mnemonics there. More information can be found on the [Tatum KMS GitHub pages](https://github.com/tatumio/tatum-kms), where all of the source code is available.
 
 ---
 
-## Recap
+## Great job!
 
-To sum it up, we have connected MetaMask to our web app, chosen the operation to perform (deploy an NFT smart contract), used Tatum in KMS mode to prepare the transaction, set the correct sender account and gas price parameters, and let MetaMask sign and broadcast the operation.
-The same method can be used for many other blockchain operations, allowing you to connect MetaMask to your non-custodial app for a wide range of use cases.
+Now you can create super-secure, scalable custodial apps in no time! Stay tuned for more updates and tutorials on different ways to work with Tatum KMS, and check out our Crypto Exchange workshop for more on how to use KMS:
 
-Everything we have done here is available in this [JSFiddle](https://jsfiddle.net/u7Lmfhqo/5/).
+https://www.youtube.com/watch?time_continue=209&v=CGgyyTTv0yw&feature=emb_title&ab_channel=Tatum
+
