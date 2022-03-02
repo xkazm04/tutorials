@@ -8,7 +8,8 @@
 
 A crypto exchange is a web application where users can trade their crypto assets. The operator of the exchange is the one who owns the private keys to all of the user's crypto assets - in this case, we are talking about a custodial exchange leveraging a custodial wallet.
 
-https://www.youtube.com/watch?time_continue=1&v=pVBNvh04ixo&feature=emb_title
+<div youtube-url="https://www.youtube.com/watch?time_continue=1&v=pVBNvh04ixo&feature=emb_title"></div>
+
 
 <div class="toolbar-note">
 A custodial wallet is a wallet where a third party holds the private keys, not the crypto assets owner. The provider has full control over crypto assets, while users only have permission to send or receive payments.
@@ -581,7 +582,7 @@ You can see that the only difference is the fill property, which is the same as 
 
 If you'd like to learn how to implement fiat currencies and securely work with private keys using Tatum KMS in your exchange, please continue to our **Crypto exchange part 2** workshop below.
 
-https://www.youtube.com/watch?time_continue=209&v=CGgyyTTv0yw&feature=emb_title&ab_channel=Tatum
+<div youtube-url="https://www.youtube.com/watch?time_continue=209&v=CGgyyTTv0yw&feature=emb_title&ab_channel=Tatum"></div>
 
 
 
