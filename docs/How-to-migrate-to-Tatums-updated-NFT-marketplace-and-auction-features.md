@@ -26,7 +26,7 @@ And finally, if NFT creators want to receive cashback in a custom ERC-20 token, 
 
 Our new NFT marketplace and auction workflows have just two different steps than the previous workflows, assuming you’d like to use provenance and percentage royalty functionality. It works like this, with the new steps in bold lettering:
 1. Mint an NFT. For more information on how mint royalty NFTs with provenance data and percentage cashback, please refer to [this guide](https://docs.tatum.io/guides/blockchain/how-to-create-royalty-nfts-with-percentage-cashback-and-provenance-data).
-2. If you’d like to set cashback to be paid out in any custom ERC-20 token on whatever blockchain you’re minting on, you can now do so by adding an “ERC20” property to the API endpoint body. In this field, enter the smart contract address of the ERC-20 token in which the cashback will be paid out. Please refer to our guide on [how to create royalty NFTs with provenance data and percentage cashback](url) for more information.
+2. If you’d like to set cashback to be paid out in any custom ERC-20 token on whatever blockchain you’re minting on, you can now do so by adding an “ERC20” property to the API endpoint body. In this field, enter the smart contract address of the ERC-20 token in which the cashback will be paid out. Please refer to our guide on [how to create royalty NFTs with provenance data and percentage cashback](https://docs.tatum.io/guides/blockchain/how-to-create-royalty-nfts-with-percentage-cashback-and-provenance-data) for more information.
 3. Give permission to the NFT marketplace or auction smart contract to transfer the NFT.
 
 <div class='tabbed-code-blocks'>
