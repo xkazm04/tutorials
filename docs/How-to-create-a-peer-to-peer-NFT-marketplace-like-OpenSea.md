@@ -8,7 +8,7 @@ Peer-to-peer NFT marketplaces like OpenSea allow users to create NFTs with metad
 
 If you want to build a backend for your own peer-to-peer NFT marketplace, you’ll definitely want to implement the same functionality. 
 
-[Creating NFTs]() has always been super simple with Tatum. But now, you can also create NFT marketplaces and listings using just a few API calls. When the NFT is sold, the creator is automatically paid, the NFT is instantly transferred to the buyer, and you, the owner of the marketplace, automatically receive a percentage of the transaction. Everything happens on the blockchain, so there's no need to create a complex, application-level backend to run the listings.
+[Creating NFTs](https://docs.tatum.io/rest/smart-contracts/deploy-nft-smart-contract) has always been super simple with Tatum. But now, you can also create NFT marketplaces and listings using just a few API calls. When the NFT is sold, the creator is automatically paid, the NFT is instantly transferred to the buyer, and you, the owner of the marketplace, automatically receive a percentage of the transaction. Everything happens on the blockchain, so there's no need to create a complex, application-level backend to run the listings.
 
 <div class="toolbar-note">
 With this type of marketplace, your users can create listings to sell ERC-721 or ERC-1155 tokens. These tokens can be purchased with the native assets of the given blockchain (e.g. ETH on Ethereum or MATIC on Polygon) or any ERC-20 token available on your blockchain of choice.
@@ -462,10 +462,16 @@ And that's it, just a few API calls and you can create a full peer-to-peer NFT m
 
 For how to work with external NFTs, Tatum royalty NFTs, and selling NFTs for native assets or ERC-20 tokens, check out our tutorials:
 
-https://youtu.be/pJY8kF2s-mI
+<div youtube-url="https://youtu.be/pJY8kF2s-mI"></div>
 
-https://youtu.be/pl-p-6u8dyA
+<div youtube-url="hhttps://youtu.be/pl-p-6u8dyA"></div>
 
-https://youtu.be/bBQif9IM9Fw
+<div youtube-url="https://youtu.be/bBQif9IM9Fw"></div>
 
-https://youtu.be/W1Aozjke--0
+<div youtube-url="https://youtu.be/W1Aozjke--0"></div>
+
+
+
+
+
+
