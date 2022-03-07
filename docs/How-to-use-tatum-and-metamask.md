@@ -1,6 +1,6 @@
 # How to use Tatum and MetaMask
 
-*Connect MetaMask and leverage Tatum's  abstraction in no time*
+*Connect MetaMask and leverage Tatum's abstraction in no time*
 
 ---
 
