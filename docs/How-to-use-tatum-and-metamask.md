@@ -1,6 +1,6 @@
 # How to use Tatum and MetaMask
 
-*Connect MetaMask and leverage Tatum's abstraction in no time*
+*Connect MetaMask and leverage Tatum's  abstraction in no time*
 
 ---
 
@@ -14,10 +14,10 @@ If you build a non-custodial application, most of your users will probably use M
 
 The first step is to connect your web app with MetaMask. To do so, we'll create an Enable button on your web page that will request the accounts handled by MetaMask.
 
+
+`<button class="enableMetamask">Enable MetaMask</button>`
+
 <div class='tabbed-code-blocks'>
-```HTML
-<button class="enableMetamask">Enable MetaMask</button>
-```
 ```JS
 let accounts = [];
 document.querySelector('.enableMetamask')
@@ -29,6 +29,7 @@ document.querySelector('.enableMetamask')
 });
 ```
 </div>
+
 When a user clicks on the **Enable** button, the MetaMask UI will prompt you for a connection. It will then expose the managed accounts to the web app. 
 
 In this example, we are assuming that MetaMask is installed as a Chrome extension. For more complex scenarios, take a look at these [official MetaMask guides](https://docs.metamask.io/guide/create-dapp.html#basic-action-part-1).
